@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import sys
 
 import numpy as np
@@ -139,7 +140,11 @@ def main(argv=None):
     except core.EventNotFound as e:
         print(json.dumps({'error': 'not_found', 'message': str(e)}))
         return 2
-    except (ValueError, RuntimeError) as e:
+    except subprocess.CalledProcessError as e:
+        detail = (e.stderr.decode(errors='replace') if isinstance(e.stderr, bytes) else e.stderr or '').strip()
+        print(json.dumps({'error': 'bad_input', 'message': f'ffmpeg/ffprobe could not read the input: {detail[-500:]}'}))
+        return 1
+    except (ValueError, RuntimeError, FileNotFoundError) as e:
         print(json.dumps({'error': 'bad_input', 'message': str(e)}))
         return 1
     print(json.dumps(result, indent=2))

@@ -95,6 +95,11 @@ class EventSyncTest(unittest.TestCase):
             self.assertEqual(main(['series', self.screen, '--kind', 'knob', '--roi', roi(synth.KNOB), '--out', out]), 0)
             self.assertTrue(open(out).readline().startswith('time,value'))
 
+    def test_missing_file_is_json_error(self):
+        code, r = self.run_cli('onset', '/no/such/file.mp4')
+        self.assertEqual(code, 1)
+        self.assertEqual(r['error'], 'bad_input')
+
     def test_bad_color(self):
         code, r = self.run_cli('event', self.screen, '--roi', roi(synth.BUTTON), '--color', 'mauve')
         self.assertEqual(code, 1)

@@ -66,6 +66,7 @@ eventsync verify plugin.mov --a-series knob --a-roi 590,307,156,156 --b-series b
 - A MOTION/automation playback keeps a knob moving: `align` on `knob` works far better there than a single onset.
 - The latency differs per take (seen: 0.84–1.14 s on one Wi-Fi network in one evening). Never reuse one take's shift for another.
 - Silence before the first note: `brightness` ignores it, but `envelope` doesn't. Prefer `brightness` or `onset`.
+- **Verify the joined video, every clip, not the clips you joined.** Clips that were each in sync drifted once concatenated: each one's picture ran 0.13–0.2 s longer than its sound, so by the sixth clip the picture was 233 ms late. For each clip's time range in the final file, compare `event` on the key's output rectangle with `onset` (cut the range out first, or use `series` and look in the range). [promo-composer](https://github.com/sufystudios/promo-composer)'s `layout` command gives the output rectangle.
 
 ## Changing the code
 
