@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eventsync"
+version = "0.1.0"
+description = "Line up a screen recording and separately recorded audio by events (a key lighting up, a sound starting, a knob turning), not clocks."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.22"]
+keywords = ["video", "audio", "sync", "screen recording", "promo", "ffmpeg", "ai-agents"]
+
+[project.scripts]
+eventsync = "eventsync.cli:main"
+
+[tool.setuptools]
+packages = ["eventsync"]

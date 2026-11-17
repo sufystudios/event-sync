@@ -1,0 +1,4 @@
+demo-media/
+__pycache__/
+*.egg-info/
+.DS_Store
